@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Contactos</string>
+    <string name="titulo_nuevo">Nuevo contacto</string>
+    <string name="titulo_switch">Cambiar vista</string>
+    <string name="titulo_search">Buscar contacto</string>
+    <string name="titulo_direccion">Dirección</string>
+    <string name="tituloNombre">Maricela</string>
+    <string name="titulo_empresa">Contoso</string>
+    <string name="titulo_edad">Edad</string>
+    <string name="titulo_telefono">Teléfono</string>
+    <string name="descripcion_edad">34 años</string>
+    <string name="descripcion_peso">56 kg</string>
+    <string name="descripcion_telefono">722 12393512</string>
+    <string name="titulo_email">Email</string>
+    <string name="descripcion_email">mari@contoso.com</string>
+    <string name="descripcion_direccion">Luciernagas 245</string>
+    <string name="titulo_peso">Peso</string>
+    <string name="foto_de_contacto">Foto de Contacto</string>
+    <string name="tituloApellidos">Saavedra</string>
+    <string name="hint_apellidos">Apellidos</string>
+    <string name="hint_nombre">Nombre</string>
+    <string name="hint_empresa">Empresa</string>
+    <string name="hint_edad">34 años</string>
+    <string name="hint_peso">56 kg</string>
+    <string name="hint_email">yaoming@hotmail.com</string>
+    <string name="hint_direccion">Siempreviva 888</string>
+    <string name="hint_telefono">215-21-35325</string>
+    <string name="titulo_crear_nuevo">CREAR NUEVO CONTACTO</string>
+</resources>
