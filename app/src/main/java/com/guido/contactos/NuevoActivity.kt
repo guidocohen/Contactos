@@ -18,6 +18,7 @@ class NuevoActivity : AppCompatActivity() {
         R.drawable.foto_01, R.drawable.foto_02, R.drawable.foto_03,
         R.drawable.foto_04, R.drawable.foto_05, R.drawable.foto_06
     )
+    private var index: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +30,13 @@ class NuevoActivity : AppCompatActivity() {
         ivFotoNueva.setOnClickListener {
             seleccionarFoto()
         }
-    }
 
+        // Reconocer acción de nuevo vs editar
+        if (intent.hasExtra("ID")) {
+            index = intent.getStringExtra("ID")!!.toInt()
+            rellenarDatos(index)
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_nuevo, menu)
@@ -45,19 +51,19 @@ class NuevoActivity : AppCompatActivity() {
             }
             R.id.iCrearNuevo -> {
                 if (hayCamposVacios()) return true
-                MainActivity.agregarContacto(
-                    Contacto(
-                        etNombre.text.toString(),
-                        etApellidos.text.toString(),
-                        etEmpresa.text.toString(),
-                        etEdad.text.toString().toInt(),
-                        etPeso.text.toString().toFloat(),
-                        etDireccion.text.toString(),
-                        etTelefono.text.toString(),
-                        etEmail.text.toString(),
-                        obtenerFoto(fotoIndex)
-                    )
+                val contacto = Contacto(
+                    etNombre.text.toString(),
+                    etApellidos.text.toString(),
+                    etEmpresa.text.toString(),
+                    etEdad.text.toString().toInt(),
+                    etPeso.text.toString().toFloat(),
+                    etDireccion.text.toString(),
+                    etTelefono.text.toString(),
+                    etEmail.text.toString(),
+                    obtenerFoto(fotoIndex)
                 )
+                if (index > -1) MainActivity.actualizarContacto(index, contacto)
+                else MainActivity.agregarContacto(contacto)
                 finish()
                 true
             }
@@ -114,4 +120,27 @@ class NuevoActivity : AppCompatActivity() {
     private fun obtenerFoto(index: Int): Int {
         return fotos[index]
     }
+
+    private fun rellenarDatos(index: Int) {
+        val contacto = MainActivity.obtenerContacto(index)
+
+        etNombre.setText(contacto.nombre)
+        etApellidos.setText(contacto.apellidos)
+        etEmpresa.setText(contacto.empresa)
+        etEdad.setText(contacto.edad.toString())
+        etPeso.setText(contacto.peso.toString())
+        etTelefono.setText(contacto.telefono)
+        etEmail.setText(contacto.email)
+        etDireccion.setText(contacto.direccion)
+
+        ivFotoNueva.setImageResource(contacto.foto)
+
+        for ((posicion, foto) in fotos.withIndex()) {
+            if (contacto.foto == foto) {
+                fotoIndex = posicion
+            }
+        }
+    }
+
+    
 }

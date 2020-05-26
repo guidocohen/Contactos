@@ -1,5 +1,6 @@
 package com.guido.contactos
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -18,6 +19,11 @@ class DetalleActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         index = intent.getStringExtra("ID")!!.toInt()
+
+        mapearDatos()
+    }
+
+    private fun mapearDatos() {
         val contacto = MainActivity.obtenerContacto(index)
 
         tvNombre.text = contacto.nombre.plus(" ").plus(contacto.apellidos)
@@ -29,7 +35,6 @@ class DetalleActivity : AppCompatActivity() {
         tvDireccion.text = contacto.direccion
         ivFotoDetalle.setImageResource(contacto.foto)
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_detalle, menu)
         return super.onCreateOptionsMenu(menu)
@@ -42,6 +47,9 @@ class DetalleActivity : AppCompatActivity() {
                 true
             }
             R.id.iEditar -> {
+                val intent = Intent(this, NuevoActivity::class.java)
+                intent.putExtra("ID", index.toString())
+                startActivity(intent)
                 true
             }
             R.id.iEliminar -> {
@@ -53,6 +61,11 @@ class DetalleActivity : AppCompatActivity() {
                 super.onOptionsItemSelected(item)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapearDatos()
     }
 
 }
