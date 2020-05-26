@@ -24,7 +24,7 @@ class AdaptadorCustom(var contexto: Context, private var items:ArrayList<Contact
 
         val item = getItem(position) as Contacto
 
-        viewHolder.nombre?.text = item.nombre.plus(" ").plus(item.apellido)
+        viewHolder.nombre?.text = item.nombre.plus(" ").plus(item.apellidos)
         viewHolder.empresa?.text = item.empresa
         viewHolder.foto?.setImageResource(item.foto)
 
@@ -40,7 +40,7 @@ class AdaptadorCustom(var contexto: Context, private var items:ArrayList<Contact
     }
 
     override fun getCount(): Int {
-        return this.items.count()!!
+        return this.items.count()
     }
 
     private class ViewHolder(vista: View) {

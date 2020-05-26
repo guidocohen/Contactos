@@ -14,7 +14,6 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etTelefono" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivFotoNueva"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginStart="16dp"
@@ -41,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarNuevo"
-        app:srcCompat="@drawable/foto_06" />
+        app:srcCompat="@drawable/foto_01" />
 
     <EditText
         android:id="@+id/etNombre"
@@ -56,7 +55,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toStartOf="@+id/etApellidos"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivFotoNueva" />
 
     <EditText
         android:id="@+id/etApellidos"
@@ -69,7 +68,7 @@
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/ivFotoNueva"
         android:autofillHints="Apellidos" />
 
     <EditText

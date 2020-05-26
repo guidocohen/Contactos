@@ -10,15 +10,23 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var lista:ListView
-    private lateinit var adaptador:AdaptadorCustom
+    private lateinit var lista: ListView
+    private lateinit var adaptador: AdaptadorCustom
+
     companion object {
         var contactos = ArrayList<Contacto>()
 
-        fun agregarContacto(contacto:Contacto) {
+        fun agregarContacto(contacto: Contacto) {
             contactos.add(contacto)
         }
 
+        fun obtenerContacto(i: Int): Contacto {
+            return contactos[i]
+        }
+
+        fun eliminarContacto(i: Int) {
+            contactos.removeAt(i)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +47,12 @@ class MainActivity : AppCompatActivity() {
         adaptador = AdaptadorCustom(this, contactos)
 
         lista.adapter = adaptador
+
+        lista.setOnItemClickListener { _, _, position, _ ->
+            val intent = Intent(this, DetalleActivity::class.java)
+            intent.putExtra("ID", position.toString())
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -47,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.iNuevo -> {
                 val intent = Intent(this, NuevoActivity::class.java)
                 startActivity(intent)
