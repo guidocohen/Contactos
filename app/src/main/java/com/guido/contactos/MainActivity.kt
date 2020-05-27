@@ -6,21 +6,26 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.GridView
 import android.widget.ListView
 import android.widget.SearchView
+import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var lista: ListView
+    private lateinit var grid: GridView
 
     companion object {
         var contactos = ArrayList<Contacto>()
         private lateinit var adaptador: AdaptadorCustom
+        private lateinit var adaptadorGrid: AdaptadorCustomGrid
 
         fun agregarContacto(contacto: Contacto) {
             adaptador.addItem(contacto)
+            //adaptadorGrid.addItem(contacto)
         }
 
         fun obtenerContacto(i: Int): Contacto {
@@ -66,10 +71,14 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        lista = findViewById<ListView>(R.id.lista)
+        lista = findViewById(R.id.lista)
+        grid = findViewById(R.id.grid)
+
         adaptador = AdaptadorCustom(this, contactos)
+        adaptadorGrid = AdaptadorCustomGrid(this, contactos)
 
         lista.adapter = adaptador
+        grid.adapter = adaptadorGrid
 
         lista.setOnItemClickListener { _, _, position, _ ->
             val intent = Intent(this, DetalleActivity::class.java)
@@ -78,13 +87,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+
+        menu.findItem(R.id.switchView).setActionView(R.layout.switch_item)
+            .actionView.findViewById<Switch>(R.id.sCambiaVista)
+            .setOnCheckedChangeListener { _, _ ->
+                viewSwitcher.showNext()
+            }
 
         // Associate searchable configuration with the SearchView
         val searchManager =
             this.getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu?.findItem(R.id.searchView)?.actionView as SearchView).apply {
+        (menu.findItem(R.id.searchView)?.actionView as SearchView).apply {
             queryHint = "Buscar contacto..."
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {

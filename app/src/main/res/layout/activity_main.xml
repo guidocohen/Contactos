@@ -19,10 +19,24 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/Theme.AppCompat.Light"/>
 
-    <ListView
-        android:id="@+id/lista"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <ViewSwitcher
+            android:id="@+id/viewSwitcher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/lista"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+
+            <GridView
+                android:id="@+id/grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numColumns="2" />
+        </ViewSwitcher>
     </LinearLayout>
 
 </LinearLayout>
