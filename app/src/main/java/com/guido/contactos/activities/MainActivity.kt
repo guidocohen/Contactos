@@ -72,18 +72,10 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        adaptador =
-            AdaptadorList(
-                this,
-                contactos
-            )
-        listView.adapter =
-            adaptador
+        adaptador = AdaptadorList(this, contactos)
+        listView.adapter = adaptador
 
-        gridView.adapter = AdaptadorGrid(
-            this,
-            contactos
-        )
+        gridView.adapter = AdaptadorGrid(this, contactos)
 
         listView.setOnItemClickListener { _, _, position, _ ->
             goToActivity(position)
@@ -91,8 +83,6 @@ class MainActivity : AppCompatActivity() {
         gridView.setOnItemClickListener { _, _, position, _ ->
             goToActivity(position)
         }
-
-        hideKeyboard()
     }
 
     private fun goToActivity(position: Int) {
@@ -100,34 +90,23 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("ID", position.toString())
         startActivity(intent)
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
 
-        menu.findItem(R.id.switchView).setActionView(
-            R.layout.switch_item
-        )
+        menu.findItem(R.id.switchView).setActionView(R.layout.switch_item)
             .actionView.findViewById<Switch>(R.id.sCambiaVista)
             .setOnCheckedChangeListener { _, _ ->
                 viewSwitcher.showNext()
                 if (listView.visibility == View.VISIBLE) {
-                    adaptador =
-                        AdaptadorList(
-                            this,
-                            contactos
-                        )
-                    listView.adapter =
-                        adaptador
+                    adaptador = AdaptadorList(this, contactos)
+                    listView.adapter = adaptador
                 } else {
-                    adaptador =
-                        AdaptadorGrid(
-                            this,
-                            contactos
-                        )
-                    gridView.adapter =
-                        adaptador
+                    adaptador = AdaptadorGrid(this, contactos)
+                    gridView.adapter = adaptador
                 }
             }
-        // Associate searchable configuration with the SearchView
+
         val searchManager =
             this.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.searchView)?.actionView as SearchView).apply {
@@ -144,6 +123,7 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+
         return super.onCreateOptionsMenu(menu)
     }
 

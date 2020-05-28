@@ -1,6 +1,5 @@
 package com.guido.contactos.adapters
 
-import android.content.Context
 import android.widget.BaseAdapter
 import android.widget.Filter
 import android.widget.Filterable
@@ -9,7 +8,6 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 abstract class AdaptadorCustom(
-    private var contexto: Context,
     private var items: ArrayList<Contacto>
 ) :
     BaseAdapter(), Filterable {

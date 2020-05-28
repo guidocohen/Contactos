@@ -10,7 +10,7 @@ import com.guido.contactos.R
 import com.guido.contactos.models.Contacto
 
 class AdaptadorGrid(private var contexto: Context, items: ArrayList<Contacto>) :
-    AdaptadorCustom(contexto, items) {
+    AdaptadorCustom(items) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         lateinit var viewHolder: ViewHolder
