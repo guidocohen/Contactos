@@ -1,4 +1,4 @@
-package com.guido.contactos
+package com.guido.contactos.models
 
 class Contacto(
     var nombre: String, var apellidos: String, var empresa: String,

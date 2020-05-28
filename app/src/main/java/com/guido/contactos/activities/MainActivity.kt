@@ -1,31 +1,32 @@
-package com.guido.contactos
+package com.guido.contactos.activities
 
+import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.GridView
-import android.widget.ListView
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
+import com.guido.contactos.R
+import com.guido.contactos.adapters.AdaptadorCustom
+import com.guido.contactos.adapters.AdaptadorGrid
+import com.guido.contactos.adapters.AdaptadorList
+import com.guido.contactos.models.Contacto
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var lista: ListView
-    private lateinit var grid: GridView
-
     companion object {
         var contactos = ArrayList<Contacto>()
         private lateinit var adaptador: AdaptadorCustom
-        private lateinit var adaptadorGrid: AdaptadorCustomGrid
 
         fun agregarContacto(contacto: Contacto) {
             adaptador.addItem(contacto)
-            //adaptadorGrid.addItem(contacto)
         }
 
         fun obtenerContacto(i: Int): Contacto {
@@ -71,31 +72,61 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        lista = findViewById(R.id.lista)
-        grid = findViewById(R.id.grid)
+        adaptador =
+            AdaptadorList(
+                this,
+                contactos
+            )
+        listView.adapter =
+            adaptador
 
-        adaptador = AdaptadorCustom(this, contactos)
-        adaptadorGrid = AdaptadorCustomGrid(this, contactos)
+        gridView.adapter = AdaptadorGrid(
+            this,
+            contactos
+        )
 
-        lista.adapter = adaptador
-        grid.adapter = adaptadorGrid
-
-        lista.setOnItemClickListener { _, _, position, _ ->
-            val intent = Intent(this, DetalleActivity::class.java)
-            intent.putExtra("ID", position.toString())
-            startActivity(intent)
+        listView.setOnItemClickListener { _, _, position, _ ->
+            goToActivity(position)
         }
+        gridView.setOnItemClickListener { _, _, position, _ ->
+            goToActivity(position)
+        }
+
+        hideKeyboard()
     }
 
+    private fun goToActivity(position: Int) {
+        val intent = Intent(this, DetalleActivity::class.java)
+        intent.putExtra("ID", position.toString())
+        startActivity(intent)
+    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
 
-        menu.findItem(R.id.switchView).setActionView(R.layout.switch_item)
+        menu.findItem(R.id.switchView).setActionView(
+            R.layout.switch_item
+        )
             .actionView.findViewById<Switch>(R.id.sCambiaVista)
             .setOnCheckedChangeListener { _, _ ->
                 viewSwitcher.showNext()
+                if (listView.visibility == View.VISIBLE) {
+                    adaptador =
+                        AdaptadorList(
+                            this,
+                            contactos
+                        )
+                    listView.adapter =
+                        adaptador
+                } else {
+                    adaptador =
+                        AdaptadorGrid(
+                            this,
+                            contactos
+                        )
+                    gridView.adapter =
+                        adaptador
+                }
             }
-
         // Associate searchable configuration with the SearchView
         val searchManager =
             this.getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -133,5 +164,15 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         adaptador.notifyDataSetChanged()
+    }
+
+    private fun Activity.hideKeyboard() {
+        hideKeyboard(currentFocus ?: View(this))
+    }
+
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

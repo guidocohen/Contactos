@@ -1,10 +1,11 @@
-package com.guido.contactos
+package com.guido.contactos.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.guido.contactos.R
 import kotlinx.android.synthetic.main.activity_detalle.*
 
 class DetalleActivity : AppCompatActivity() {
@@ -24,7 +25,8 @@ class DetalleActivity : AppCompatActivity() {
     }
 
     private fun mapearDatos() {
-        val contacto = MainActivity.obtenerContacto(index)
+        val contacto =
+            MainActivity.obtenerContacto(index)
 
         tvNombre.text = contacto.nombre.plus(" ").plus(contacto.apellidos)
         tvEmpresa.text = contacto.empresa

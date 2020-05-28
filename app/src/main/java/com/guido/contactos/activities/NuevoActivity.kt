@@ -1,4 +1,4 @@
-package com.guido.contactos
+package com.guido.contactos.activities
 
 import android.os.Bundle
 import android.view.Menu
@@ -9,14 +9,20 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.guido.contactos.R
+import com.guido.contactos.models.Contacto
 import kotlinx.android.synthetic.main.activity_nuevo.*
 
 class NuevoActivity : AppCompatActivity() {
 
     private var fotoIndex: Int = 0
     private var fotos = arrayOf(
-        R.drawable.foto_01, R.drawable.foto_02, R.drawable.foto_03,
-        R.drawable.foto_04, R.drawable.foto_05, R.drawable.foto_06
+        R.drawable.foto_01,
+        R.drawable.foto_02,
+        R.drawable.foto_03,
+        R.drawable.foto_04,
+        R.drawable.foto_05,
+        R.drawable.foto_06
     )
     private var index: Int = -1
 
@@ -62,8 +68,13 @@ class NuevoActivity : AppCompatActivity() {
                     etEmail.text.toString(),
                     obtenerFoto(fotoIndex)
                 )
-                if (index > -1) MainActivity.actualizarContacto(index, contacto)
-                else MainActivity.agregarContacto(contacto)
+                if (index > -1) MainActivity.actualizarContacto(
+                    index,
+                    contacto
+                )
+                else MainActivity.agregarContacto(
+                    contacto
+                )
                 finish()
                 true
             }
@@ -122,7 +133,8 @@ class NuevoActivity : AppCompatActivity() {
     }
 
     private fun rellenarDatos(index: Int) {
-        val contacto = MainActivity.obtenerContacto(index)
+        val contacto =
+            MainActivity.obtenerContacto(index)
 
         etNombre.setText(contacto.nombre)
         etApellidos.setText(contacto.apellidos)
