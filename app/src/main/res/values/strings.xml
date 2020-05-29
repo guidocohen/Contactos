@@ -28,4 +28,6 @@
     <string name="titulo_crear_nuevo">CREAR NUEVO CONTACTO</string>
     <string name="titulo_eliminar_contacto">Eliminar Contacto</string>
     <string name="titulo_editar_contacto">Editar Contacto</string>
+    <string name="search_hint">¿A quién deseas buscar?</string>
+    <string name="search_global_description">Search</string>
 </resources>

@@ -68,13 +68,8 @@ class NuevoActivity : AppCompatActivity() {
                     etEmail.text.toString(),
                     obtenerFoto(fotoIndex)
                 )
-                if (index > -1) MainActivity.actualizarContacto(
-                    index,
-                    contacto
-                )
-                else MainActivity.agregarContacto(
-                    contacto
-                )
+                if (index > -1) ContactosActivity.actualizarContacto(index, contacto)
+                else ContactosActivity.agregarContacto(contacto)
                 finish()
                 true
             }
@@ -91,7 +86,10 @@ class NuevoActivity : AppCompatActivity() {
                 val editText = layout_nuevo.getChildAt(i) as EditText
 
                 if (editText.text.toString().isEmpty()) {
-                    Toast.makeText(this, "Debe completar todos los campos", LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Debe completar todos los campos", LENGTH_SHORT
+                    ).show()
                     return true
                 }
             }
@@ -104,14 +102,7 @@ class NuevoActivity : AppCompatActivity() {
         builder.setTitle("Selecciona imagen de perfil")
         val entries =
             ArrayList<String>(
-                listOf(
-                    "Foto 01",
-                    "Foto 02",
-                    "Foto 03",
-                    "Foto 04",
-                    "Foto 05",
-                    "Foto 06"
-                )
+                listOf("Foto 01", "Foto 02", "Foto 03", "Foto 04", "Foto 05", "Foto 06")
             )
         val dialogAdapter =
             ArrayAdapter(this, android.R.layout.simple_selectable_list_item, entries)
@@ -133,8 +124,7 @@ class NuevoActivity : AppCompatActivity() {
     }
 
     private fun rellenarDatos(index: Int) {
-        val contacto =
-            MainActivity.obtenerContacto(index)
+        val contacto = ContactosActivity.obtenerContacto(index)
 
         etNombre.setText(contacto.nombre)
         etApellidos.setText(contacto.apellidos)

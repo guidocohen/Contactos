@@ -26,7 +26,7 @@ class DetalleActivity : AppCompatActivity() {
 
     private fun mapearDatos() {
         val contacto =
-            MainActivity.obtenerContacto(index)
+            ContactosActivity.obtenerContacto(index)
 
         tvNombre.text = contacto.nombre.plus(" ").plus(contacto.apellidos)
         tvEmpresa.text = contacto.empresa
@@ -55,7 +55,7 @@ class DetalleActivity : AppCompatActivity() {
                 true
             }
             R.id.iEliminar -> {
-                MainActivity.eliminarContacto(index)
+                ContactosActivity.eliminarContacto(index)
                 finish()
                 true
             }
