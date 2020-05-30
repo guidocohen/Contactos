@@ -30,7 +30,6 @@ class ContactosActivity : AppCompatActivity() {
 
         fun agregarContacto(contacto: Contacto) {
             adaptador.addItem(contacto)
-            adaptador.filter.filter(query)
         }
 
         fun obtenerContacto(idex: Int): Contacto {
@@ -39,12 +38,10 @@ class ContactosActivity : AppCompatActivity() {
 
         fun eliminarContacto(index: Int) {
             adaptador.removeItem(index)
-            //adaptador.filter.filter("")
         }
 
         fun actualizarContacto(index: Int, nuevoContacto: Contacto) {
             adaptador.updateItem(index, nuevoContacto)
-            //adaptador.filter.filter("")
         }
     }
 

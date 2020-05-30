@@ -25,8 +25,7 @@ class DetalleActivity : AppCompatActivity() {
     }
 
     private fun mapearDatos() {
-        val contacto =
-            ContactosActivity.obtenerContacto(index)
+        val contacto = ContactosActivity.obtenerContacto(index)
 
         tvNombre.text = contacto.nombre.plus(" ").plus(contacto.apellidos)
         tvEmpresa.text = contacto.empresa
@@ -37,6 +36,7 @@ class DetalleActivity : AppCompatActivity() {
         tvDireccion.text = contacto.direccion
         ivFotoDetalle.setImageResource(contacto.foto)
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_detalle, menu)
         return super.onCreateOptionsMenu(menu)

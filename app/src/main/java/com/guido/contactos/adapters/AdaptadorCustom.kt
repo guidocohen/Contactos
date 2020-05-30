@@ -28,19 +28,19 @@ abstract class AdaptadorCustom(
 
     fun addItem(item: Contacto) {
         copiaItems.add(item)
-        items = ArrayList(copiaItems)
+        items.add(item)
         notifyDataSetChanged()
     }
 
     fun updateItem(index: Int, newItem: Contacto) {
-        copiaItems[index] = newItem
-        items = ArrayList(copiaItems)
+        copiaItems[(copiaItems.indexOf(items[index]))] = newItem
+        items[index] = newItem
         notifyDataSetChanged()
     }
 
     fun removeItem(index: Int) {
-        copiaItems.removeAt(index)
-        items = ArrayList(copiaItems)
+        copiaItems.removeAt(copiaItems.indexOf(items[index]))
+        items.removeAt(index)
         notifyDataSetChanged()
     }
 
