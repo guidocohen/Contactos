@@ -41,7 +41,7 @@ class ContactosActivity : AppCompatActivity() {
         }
 
         fun actualizarContacto(index: Int, nuevoContacto: Contacto) {
-            adaptador.updateItem(index, nuevoContacto)
+            adaptador.updateItem(index, nuevoContacto, query)
         }
     }
 

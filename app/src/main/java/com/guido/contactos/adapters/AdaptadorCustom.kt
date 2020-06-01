@@ -32,15 +32,16 @@ abstract class AdaptadorCustom(
         notifyDataSetChanged()
     }
 
-    fun updateItem(index: Int, newItem: Contacto) {
+    fun updateItem(index: Int, newItem: Contacto, query: String) {
         copiaItems[(copiaItems.indexOf(items[index]))] = newItem
         items[index] = newItem
         notifyDataSetChanged()
     }
 
     fun removeItem(index: Int) {
-        copiaItems.removeAt(copiaItems.indexOf(items[index]))
-        items.removeAt(index)
+        val item = items[index]
+        copiaItems.remove(item)
+        items.remove(item)
         notifyDataSetChanged()
     }
 
